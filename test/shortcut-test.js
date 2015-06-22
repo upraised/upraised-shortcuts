@@ -49,6 +49,7 @@ describe('Shortcuts', function () {
       shortcuts = new Shortcuts.Shortcuts();
       shortcuts.connect(url, function (err) {
         if (err) return next(err);
+        // next();
         shortcuts.removeAll(next);
       });
     }
@@ -79,12 +80,12 @@ describe('Shortcuts', function () {
       shortcuts.add('TEST', {foo: 'bar'}, function (err, cut) {
         assert.isNull(err, 'Error adding shortcut');
         assert.ok(cut, 'No shortcut returned');
-        shortcuts.add(cut, {foo: 'baz'}, function (err, cut2) {
-          assert.ok(cut !== cut2, 'Same key addeded again');
-          shortcuts.find(cut2, function (err, record) {
+        shortcuts.add('TEST', {foo: 'baz'}, function (err, cut2) {
+          assert.ok(!cut2, 'Duplicate shortcut added');
+          shortcuts.find('TEST', function (err, record) {
             assert.isNull(err, 'Error finding new shortcut');
             assert.ok(record, 'No new shortcut record found');
-            assert.equal(record.data.foo, 'baz', 'Meta data not returned');
+            assert.equal(record.data.foo, 'bar', 'Meta data overwritten');
             next();
           });
         });

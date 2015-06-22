@@ -1,6 +1,6 @@
 {
   "name": "upraised-shortcuts",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Create and manage individual shortcuts",
   "main": "index.js",
   "author": "Jeffrey Mathews <jeff@upraised.org>",
